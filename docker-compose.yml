@@ -1,0 +1,10 @@
+version: '3'
+services:
+  nagios:
+    build: .
+    ports:
+     - "85:80"
+    volumes:
+     - /var/docker-data/nagios/etc/nagios.cfg:/usr/local/nagios/etc/nagios.cfg
+     - /var/docker-data/nagios/etc/noc/hosts.cfg:/usr/local/nagios/etc/noc/hosts.cfg
+    restart: always
