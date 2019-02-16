@@ -7,4 +7,8 @@ services:
     volumes:
      - /var/docker-data/nagios/etc/nagios.cfg:/usr/local/nagios/etc/nagios.cfg
      - /var/docker-data/nagios/etc/hosts.cfg:/usr/local/nagios/etc/noc/hosts.cfg
+     - /var/docker-data/nagios/etc/commands.cfg:/usr/local/nagios/etc/noc/commands.cfg
+     - /var/docker-data/nagios/etc/contacts.cfg:/usr/local/nagios/etc/noc/contacts.cfg
+     - /var/docker-data/nagios/etc/groups.cfg:/usr/local/nagios/etc/noc/groups.cfg
+     - /var/docker-data/nagios/etc/services.cfg:/usr/local/nagios/etc/noc/services.cfg
     restart: always
