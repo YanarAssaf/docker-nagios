@@ -1,8 +1,9 @@
 sudo: required
+language: generic
 services:
  - docker
  
-install:
+before_install:
  - docker build -t yanar/nagios .
 
 secript:
