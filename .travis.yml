@@ -7,4 +7,4 @@ before_install:
  - docker build -t yanar/nagios .
 
 script:
- - docker run yanar/nagios /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios4.cfg
+ - docker run yanar/nagios /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
