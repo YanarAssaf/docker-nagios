@@ -1,0 +1,9 @@
+sudo: required
+services:
+ - docker
+ 
+before_install:
+ - docker build -t yanar/nagios .
+
+secript:
+ - docker run yanar/nagios /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
