@@ -15,6 +15,7 @@ RUN make install-daemoninit
 RUN make install-commandmode
 RUN make install-config
 RUN make install-webconf
+RUN usermod --shell /bin/bash nagios
 RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
 COPY ./run.sh /srv/
 EXPOSE 80
