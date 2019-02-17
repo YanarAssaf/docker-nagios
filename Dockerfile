@@ -24,5 +24,7 @@ RUN chmod +x /srv/run.sh
 
 #Plugins
 RUN cd /srv/ && tar xzf nagios-plugins-release-2.2.1.tar.gz
-RUN cd /srv/nagios-plugins-release-2.2.1/ && ./tools/setup && ./configure make && make install
+WORKDIR /srv/nagios-plugins-release-2.2.1
+RUN ./tools/setup && ./configure && make && make install
+WORKDIR /usr/local/nagios
 CMD /srv/run.sh
