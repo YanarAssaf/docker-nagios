@@ -12,7 +12,6 @@ RUN make install-groups-users
 RUN usermod -a -G nagios apache
 RUN make install
 RUN make install-daemoninit
-RUN systemctl enable httpd.service
 RUN make install-commandmode
 RUN make install-config
 RUN make install-webconf
@@ -25,9 +24,5 @@ RUN chmod +x /srv/run.sh
 
 #Plugins
 RUN cd /srv/ && tar xzf nagios-plugins-release-2.2.1.tar.gz
-RUN cd /srv/nagios-plugins-release-2.2.1/ && ./tools/setup
-RUN cd /srv/nagios-plugins-release-2.2.1/ && ./configure
-RUN cd /srv/nagios-plugins-release-2.2.1/ && make
-RUN cd /srv/nagios-plugins-release-2.2.1/ && make install
-
+RUN cd /srv/nagios-plugins-release-2.2.1/ && ./tools/setup && ./configure make && make install
 CMD /srv/run.sh
