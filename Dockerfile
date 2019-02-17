@@ -5,10 +5,10 @@ COPY files/* ./srv/
 
 RUN cd /srv/ && tar xzf nagios-4.4.3.tar.gz
 
+#Nagios Core
 WORKDIR /srv/nagios-4.4.3
 RUN ./configure && make all
 
-#Nagios Core
 RUN make install-groups-users && usermod -a -G nagios apache && make install && make install-daemoninit && make install-commandmode && make install-config && make install-webconf && usermod --shell /bin/bash nagios
 RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
 RUN mkdir -p /usr/local/nagios/etc/noc
@@ -16,7 +16,7 @@ RUN cp /usr/lib64/nagios/plugins/check_nrpe /usr/local/nagios/libexec/
 COPY ./run.sh /srv/
 RUN chmod +x /srv/run.sh
 
-#Plugins
+#NRPE
 RUN cd /srv/ && tar xzf nagios-plugins-release-2.2.1.tar.gz
 WORKDIR /srv/nagios-plugins-release-2.2.1
 RUN ./tools/setup && ./configure && make && make install
