@@ -21,12 +21,21 @@ RUN chmod +x /srv/run.sh
 RUN cd /srv/ && tar xzf pnp4nagios-0.6.26.tar.gz
 WORKDIR /srv/pnp4nagios-0.6.26
 RUN ./configure && make all && make fullinstall
+RUN /usr/local/pnp4nagios/bin/npcd -d -f /usr/local/pnp4nagios/etc/npcd.cfg
+RUN rm -f /usr/local/pnp4nagios/share/install.php
 
 #NRPE
 RUN cd /srv/ && tar xzf nagios-plugins-release-2.2.1.tar.gz
 WORKDIR /srv/nagios-plugins-release-2.2.1
 RUN ./tools/setup && ./configure && make && make install
 
+RUN CP /srv/templates.cfg /usr/local/nagios/etc/objects
+RUN CP /srv/nagios.cfg /usr/local/nagios/etc/nagios.cfg
+RUN CP /srv/commands.cfg /usr/local/nagios/etc/noc/
+RUN CP /srv/contacts.cfg /usr/local/nagios/etc/noc/
+RUN CP /srv/groups.cfg /usr/local/nagios/etc/noc/
+RUN CP /srv/hosts.cfg /usr/local/nagios/etc/noc/
+RUN CP /srv/services.cfg /usr/local/nagios/etc/noc/
 
 WORKDIR /usr/local/nagios
 EXPOSE 80
