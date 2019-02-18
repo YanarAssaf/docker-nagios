@@ -1,6 +1,7 @@
 FROM centos:7
 RUN yum install -y epel-release
 RUN yum install -y gcc glibc glibc-common wget unzip httpd php gd gd-devel perl postfix make gettext automake autoconf  openssl-devel net-snmp net-snmp-utils perl-Net-SNMP which nagios-plugins-nrpe && yum clean all
+RUN yum install rrdtool rrdtool-perl perl-Time-HiRes perl-GD -y
 COPY files/* ./srv/
 
 RUN cd /srv/ && tar xzf nagios-4.4.3.tar.gz
@@ -16,10 +17,16 @@ RUN cp /usr/lib64/nagios/plugins/check_nrpe /usr/local/nagios/libexec/
 COPY ./run.sh /srv/
 RUN chmod +x /srv/run.sh
 
+#PNP
+RUN cd /srv/ && tar xzf pnp4nagios-0.6.26.tar.gz
+WORKDIR /srv/pnp4nagios-0.6.26
+RUN ./configure && make all && make fullinstall
+
 #NRPE
 RUN cd /srv/ && tar xzf nagios-plugins-release-2.2.1.tar.gz
 WORKDIR /srv/nagios-plugins-release-2.2.1
 RUN ./tools/setup && ./configure && make && make install
+
 
 WORKDIR /usr/local/nagios
 EXPOSE 80
