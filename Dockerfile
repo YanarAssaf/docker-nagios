@@ -29,13 +29,13 @@ RUN cd /srv/ && tar xzf nagios-plugins-release-2.2.1.tar.gz
 WORKDIR /srv/nagios-plugins-release-2.2.1
 RUN ./tools/setup && ./configure && make && make install
 
-RUN CP /srv/templates.cfg /usr/local/nagios/etc/objects
-RUN CP /srv/nagios.cfg /usr/local/nagios/etc/nagios.cfg
-RUN CP /srv/commands.cfg /usr/local/nagios/etc/noc/
-RUN CP /srv/contacts.cfg /usr/local/nagios/etc/noc/
-RUN CP /srv/groups.cfg /usr/local/nagios/etc/noc/
-RUN CP /srv/hosts.cfg /usr/local/nagios/etc/noc/
-RUN CP /srv/services.cfg /usr/local/nagios/etc/noc/
+RUN cp /srv/templates.cfg /usr/local/nagios/etc/objects
+RUN cp /srv/nagios.cfg /usr/local/nagios/etc/nagios.cfg
+RUN cp /srv/commands.cfg /usr/local/nagios/etc/noc/
+RUN cp /srv/contacts.cfg /usr/local/nagios/etc/noc/
+RUN cp /srv/groups.cfg /usr/local/nagios/etc/noc/
+RUN cp /srv/hosts.cfg /usr/local/nagios/etc/noc/
+RUN cp /srv/services.cfg /usr/local/nagios/etc/noc/
 
 WORKDIR /usr/local/nagios
 EXPOSE 80
